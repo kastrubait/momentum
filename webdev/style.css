@@ -1,0 +1,132 @@
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto Medium'), local('Roboto-Medium'), url('Robotomedium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    width: 100%;
+    max-width: 1600px;
+    font-family: Roboto;
+    margin: 0 auto;
+}
+
+header {
+    max-width: 1600px;
+    height: 95px; 
+    margin: 0 auto;
+}
+
+.header-nav {
+    height: 95px;
+    width: 800px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    color: #fff;
+}
+
+a {
+    padding-right: 10px;
+    font-size: 12px; 
+    letter-spacing: 0.05px;
+ }
+ 
+ a:hover {
+       color: #767e9e;  
+ }
+ 
+ /* h1 {
+   font-size: 30px;
+   line-height: normal;
+   color: #666d89;
+ }
+ 
+ p {
+   font-size: 12px;
+   line-height: normal;
+   color: #767e9e;
+   text-align: justify;
+ } */
+ 
+
+.YourLife {
+    width: 1600px;
+    height: 744px;
+    margin: -95px auto;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    background-image: url(./assets/bg-image-wrapper.png);
+    color: #fff;
+}
+
+.YourLife-content {
+    margin-top:  230px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 140%;
+    text-align: center;
+}
+
+.btn {
+    width: 184px;
+    height: 46px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    border: 0;
+    text-transform: uppercase;
+}
+.get {
+    background-color: #00AFDB;
+}
+.get:hover {
+    background: #0ba3c9;
+    box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.51);
+}
+
+.second {
+    width: 1600px;
+    height: 842px;
+    display: flex;
+    justify-content: center;
+}
+
+.third {
+    width: 1600px;
+    height: 504px;
+    background-color: #F5F6F7;
+}
+
+.fourth {
+    width: 1600px;
+    height: 842px;
+}
+
+.fifth {
+    width: 1600px;
+    height: 524px;
+    background-image: url(./assets/pexels-christina-morillo.png);
+}
+
+.sixth {
+    width: 1600px;
+    height: 464px;
+    background-color: #F5F6F7;
+}
+
+.footer {
+    width: 1600px;
+    height: 185px;
+    background-color: #000000; 
+}
