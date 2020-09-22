@@ -17,7 +17,7 @@ header {
 
 .header-nav {
     height: 95px;
-    width: 800px;
+    width: 700px;
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -29,14 +29,19 @@ a {
     padding-right: 10px;
     font-size: 12px; 
     letter-spacing: 0.05px;
+    color: #fff;
+    text-decoration: none;
  }
  
  a:hover {
-       color: #767e9e;  
+    color: #0ba3c9;  
  }
- 
+
+ a:focus {
+    text-decoration: underline; 
+}
+
  h1 {
-    
     font-size: 64px;
     font-style: normal;
     font-weight: 700;
@@ -94,7 +99,7 @@ a {
     background-color: #00AFDB;
 }
 .get:hover {
-    background: #0ba3c9;
+    background: #066f8a;
     box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.51);
 }
 .social-media {
@@ -126,8 +131,9 @@ object:hover {
 
 h2 {
     display: block;
-    width: 370px;;
+    width: 370px;
     padding-top: 175px;
+    padding-bottom: 20px;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -138,17 +144,20 @@ h2 {
 }
 
 .block-text2 {
-    margin-top: 20px;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
-    letter-spacing: .27px;
+    letter-spacing: .35px;
     text-align: left;
 }
 
 .left10 {
-    margin-left: 9px;
+    margin-left: 5px;
+}
+
+.left30 {
+    margin-left: 200px;
 }
 
 .img-1 {
@@ -157,22 +166,133 @@ h2 {
 }
 
 .OurCommunity {
-    margin-top: 215px;
+    margin-top: 95px;
     width: 1600px;
     height: 504px;
     background-color: #F5F6F7;
 }
 
-.fourth {
-    width: 1600px;
-    height: 842px;
+.column-out {
+    float: left;
+    margin: 155px auto;
+    width: 40%;
+    text-align: center;
 }
 
-.fifth {
+h3 {
+    display: block;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 2.4000000953674316px;
+    text-transform: uppercase;
+}
+
+.left50 {
+    display: block;
+    width: 295px;
+    margin-left: 270px;
+    text-align: center;
+}
+
+.left70 {
+    margin-left: 645px;
+    margin-right: 550px;
+} 
+.top10 {
+    padding-top: 200px;
+} 
+
+.slider {
+    padding-left: 66px;
+    margin-top: -35px;
+}
+.row-out:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+}
+  
+.nested:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.Implement {
+    width: 1600px;
+    height: 842px;
+    margin-top: 120px;
+    margin-left: 170px;
+}
+
+.img-2 {
+    padding-left: 100px;
+    float: left;
+}
+
+.btn3 {
+    margin-left: 137px;
+    margin-top: 30px;
+}
+
+.SignUp {
     width: 1600px;
     height: 524px;
+    margin-top: -120px;
+    color: #fff;
     background-image: url(./assets/pexels-christina-morillo.png);
+    display: flex;
+    text-align: center;
 }
+
+.title-form {
+    display: block;
+    width: 580px;
+    height: 28px;
+    margin-top: 25px;
+    margin-left: 510px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    width: 410px;
+    height: 50px;
+    margin-top: 257px;
+    margin-left: -494px;
+  }
+
+  .icon {
+    padding: 13px 13px 0 13px;
+    background: #00AFDB;
+    color: white;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 11px;
+    outline: none;
+  }
+  
+  .input-field:focus {
+    border: 2px solid dodgerblue;
+  }
 
 .sixth {
     width: 1600px;
