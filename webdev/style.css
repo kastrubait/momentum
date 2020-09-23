@@ -17,17 +17,17 @@ header {
 
 .header-nav {
     height: 95px;
-    width: 700px;
+    width: 600px;
     display:flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
+    margin-left: 495px;
     color: #fff;
 }
 
 a {
     padding-right: 10px;
-    font-size: 12px; 
+    font-size: 14px; 
     letter-spacing: 0.05px;
     color: #fff;
     text-decoration: none;
@@ -86,7 +86,7 @@ a {
 .btn {
     width: 184px;
     height: 46px;
-    margin-top: 32px; 
+    margin-top: 28px; 
     margin-left: -3px;
     color: #fff;
     font-weight: 700;
@@ -124,7 +124,7 @@ object:hover {
 }
 
 .Rappresent-content {
-    margin-top: 215px;
+    margin-top: 217px;
     margin-left: 20px;
     width: 1090px;
 }
@@ -148,8 +148,12 @@ h2 {
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
-    letter-spacing: .35px;
+    letter-spacing: .5px;
     text-align: left;
+}
+
+.l-space {
+    letter-spacing: .35px;
 }
 
 .left10 {
@@ -203,7 +207,7 @@ h3 {
     margin-right: 550px;
 } 
 .top10 {
-    padding-top: 200px;
+    padding-top: 199px;
 } 
 
 .slider {
@@ -237,11 +241,16 @@ h3 {
 .img-2 {
     padding-left: 100px;
     float: left;
+    padding-bottom: 140px;
 }
 
 .btn3 {
     margin-left: 137px;
     margin-top: 30px;
+}
+
+.l-space2 {
+    letter-spacing: .4px;
 }
 
 .SignUp {
@@ -271,37 +280,79 @@ h3 {
 .input-container {
     display: flex;
     width: 410px;
-    height: 50px;
-    margin-top: 257px;
-    margin-left: -494px;
+    height: 49px;
+    margin-top: 256px;
+    margin-left: -495px;
   }
 
-  .icon {
-    padding: 13px 13px 0 13px;
+  .icon2 {
+    padding: 14px 12px 0 12px;
     background: #00AFDB;
     color: white;
-    min-width: 40px;
+    min-width: 41px;
     text-align: center;
   }
 
   .input-field {
     width: 100%;
     padding: 11px;
+    padding-left: 25px;
     outline: none;
+    letter-spacing: 1px;
   }
   
   .input-field:focus {
     border: 2px solid dodgerblue;
   }
 
-.sixth {
+.six {
     width: 1600px;
     height: 464px;
     background-color: #F5F6F7;
 }
 
-.footer {
+h2.title-impl {
+    padding-top: 120px;
+    margin-left: 675px;
+}
+
+.block-text6 {
+    text-align: center;
+    width: 480px;
+    font-size: 14px;
+    padding-top: 2px;
+    margin-left: 560px;
+    line-height: 19px;
+    padding-bottom: 1px;
+}
+
+.btn6 {
+    margin-left: 600px;
+    margin-right: 32px;
+}
+
+.icon3{
+    margin-left: 10px;
+    font-size: 20px;
+    color: white;
+    min-width: 50px;
+    height: 31px;
+    background-color: #0ba3c9;
+    padding-top: 11px;
+    padding-right: -10px;
+}
+
+footer {
+    display: flex;
     width: 1600px;
     height: 185px;
-    background-color: #000000; 
+    background-color: #000000;
+    color: #fff;
+    font-size: 13px; 
+    padding-top: 76px;
+    padding-left: 160px;
+}
+
+.footer__content {
+    margin-top: 80px;
 }
