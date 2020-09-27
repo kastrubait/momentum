@@ -23,49 +23,62 @@ class Calculator {
     }
   
     chooseOperation(operation) {
-      console.log(operation, this.currentOperand);
-      if (this.currentOperand === '') return;
-      if ((this.currentOperand !== '' && this.previousOperand !== '') || (this.currentOperand === '&radic;')) {
-        console.log(operation, this.currentOperand);
+      console.log('choose:', operation, this.operation);
+      console.log('choose:', this.currentOperand,'<==>', this.previousOperand);
+      if ((this.currentOperand === '') && (operation !== '√')) {
+        this.operation = operation;
+        return;
+      }
+      if ((this.currentOperand !== '' || this.previousOperand !== '') && ( this.operation === '√')) {
+        this.compute();
+      }
+      if ((this.currentOperand !== '' || this.previousOperand !== '') && ( this.operation === '√') && (operation !== '√')) {
+        this.compute();
+     }
+     
+      if (this.currentOperand !== '' && this.previousOperand !== '') {
         this.compute();
       }
       this.operation = operation;
       this.previousOperand = this.currentOperand;
       this.currentOperand = '';
+      console.log('exit:', this.previousOperand,'-',this.operation,'-',this.currentOperand);
     }
   
     compute() {
       let computation;
       const prev = parseFloat(this.previousOperand);
       const current = parseFloat(this.currentOperand);
-      console.log(this.operation, current, prev);
-      if (isNaN(prev) || isNaN(current)) return;
-      switch (this.operation) {
-        case '+':
-          computation = prev + current;
-          break
-        case '-':
-          computation = prev - current;
-          break
-        case '*':
-          computation = prev * current;
-          break
-        case '÷':
-          computation = prev / current;
-          break
-        case '&radic;':
-          computation = Math.sqrt(current);
-          break
-        case '^':
-          computation = prev ** current;
-          break
-        default:
-          return;
+      if (isNaN(prev) || isNaN(current)) {
+        if ( this.operation !== '√') return;
       }
+        switch (this.operation) {
+          case '+':
+            computation = prev + current;
+            break
+          case '-':
+            computation = prev - current;
+            break
+          case '*':
+            computation = prev * current;
+            break
+          case '÷':
+            computation = prev / current;
+            break
+          case '√':
+            (isNaN(prev)) ? computation = Math.sqrt(current) : computation = Math.sqrt(prev);
+            break
+          case '^':
+            computation = prev ** current;
+            break
+          default:
+            return;
+        }
       this.readyToReset = true;
       this.currentOperand = computation;
       this.operation = undefined;
       this.previousOperand = '';
+      console.log('compute:', prev, this.operation, current,'=', computation);
     }
   
     roundUp() {
@@ -92,8 +105,9 @@ class Calculator {
     updateDisplay() {
       this.currentOperandTextElement.innerText =
         this.getDisplayNumber(this.currentOperand)
+        console.log('update:', this.getDisplayNumber(this.currentOperand),'operation->', this.operation)
       if (this.operation != null) {
-        this.previousOperandTextElement.innerText =
+          this.previousOperandTextElement.innerText =
           `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
       } else {
         this.previousOperandTextElement.innerText = ''
