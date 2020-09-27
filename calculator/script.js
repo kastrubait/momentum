@@ -24,7 +24,7 @@ class Calculator {
   
     chooseOperation(operation) {
       console.log('choose:', operation, this.operation);
-      console.log('choose:', this.currentOperand,'<==>', this.previousOperand);
+      console.log('choose:', this.previousOperand,'<==>', this.currentOperand);
       if ((this.currentOperand === '') && (operation !== '√')) {
         this.operation = operation;
         return;
@@ -32,17 +32,21 @@ class Calculator {
       if ((this.currentOperand !== '' || this.previousOperand !== '') && ( this.operation === '√')) {
         this.compute();
       }
-      if ((this.currentOperand !== '' || this.previousOperand !== '') && ( this.operation === '√') && (operation !== '√')) {
-        this.compute();
-     }
-     
+          
       if (this.currentOperand !== '' && this.previousOperand !== '') {
         this.compute();
       }
+
+      if (this.currentOperand !== '' && this.previousOperand === '' && this.operation === '-') {
+        this.previousOperand = -1;
+        this.operation = '*';
+        this.compute();
+      }
+
       this.operation = operation;
       this.previousOperand = this.currentOperand;
       this.currentOperand = '';
-      console.log('exit:', this.previousOperand,'-',this.operation,'-',this.currentOperand);
+      console.log('exit:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
     }
   
     compute() {
@@ -105,7 +109,7 @@ class Calculator {
     updateDisplay() {
       this.currentOperandTextElement.innerText =
         this.getDisplayNumber(this.currentOperand)
-        console.log('update:', this.getDisplayNumber(this.currentOperand),'operation->', this.operation)
+        console.log('update:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
       if (this.operation != null) {
           this.previousOperandTextElement.innerText =
           `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
@@ -148,6 +152,7 @@ class Calculator {
   
   equalsButton.addEventListener('click', button => {
     calculator.compute();
+    calculator.roundUp();
     calculator.updateDisplay();
   })
   
