@@ -11,12 +11,13 @@
   }
   
   .calculator-grid {
+    margin-top: 20px;
     display: grid;
     justify-content: center;
     align-content: center;
-    min-height: 100vh;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    min-height: 50vh;
+    grid-template-columns: repeat(4, 90px);
+    grid-template-rows: minmax(120px, auto) repeat(6, 80px);
   }
   
   .calculator-grid > button {
@@ -39,7 +40,7 @@
   }
   
   .span-two {
-    grid-column: span 2;
+    grid-column: span 3;
   }
   
   .output {
@@ -53,7 +54,6 @@
     word-wrap: break-word;
     word-break: break-all;
     border-radius: 5px;
-    box-shadow: 0 3px 3px rgb(219, 215, 215) inset;
   }
   
   .output .previous-operand {

@@ -11,6 +11,7 @@ class Calculator {
       this.previousOperand = '';
       this.operation = undefined;
       this.readyToReset = false;
+      this.sign = false;
     }
   
     delete() {
@@ -23,29 +24,33 @@ class Calculator {
     }
   
     chooseOperation(operation) {
-      console.log('choose:', operation, this.operation);
       console.log('choose:', this.previousOperand,'<==>', this.currentOperand);
-      if ((this.currentOperand === '') && (operation !== '√')) {
+      if (this.currentOperand === '' && operation !== '√' &&  operation !== '±') {
         this.operation = operation;
         return;
       }
-      if ((this.currentOperand !== '' || this.previousOperand !== '') && ( this.operation === '√')) {
+      if ((this.currentOperand !== '' || this.previousOperand !== '') && this.operation === '√' && operation !== '±') {
         this.compute();
       }
           
-      if (this.currentOperand !== '' && this.previousOperand !== '') {
+      if (this.currentOperand !== '' && operation === '±') {
+        this.currentOperand = -1 * this.currentOperand;
+        operation = '';
+        this.sign = true;
+      }
+
+      if (this.currentOperand !== '' && this.previousOperand !== '' &&  operation !== '') {
         this.compute();
       }
 
-      if (this.currentOperand !== '' && this.previousOperand === '' && this.operation === '-') {
-        this.previousOperand = -1;
-        this.operation = '*';
-        this.compute();
+      if (this.sign) {
+        this.sign = false;
+      } else {
+        if (operation === '±') return;
+        this.operation = operation;
+        this.previousOperand = this.currentOperand;
+        this.currentOperand = '';
       }
-
-      this.operation = operation;
-      this.previousOperand = this.currentOperand;
-      this.currentOperand = '';
       console.log('exit:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
     }
   
@@ -75,6 +80,9 @@ class Calculator {
           case '^':
             computation = prev ** current;
             break
+            case '±':
+              computation = current;
+              break
           default:
             return;
         }
@@ -110,7 +118,11 @@ class Calculator {
       this.currentOperandTextElement.innerText =
         this.getDisplayNumber(this.currentOperand)
         console.log('update:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
-      if (this.operation != null) {
+      if ((isNaN(this.currentOperand) || isNaN(this.previousOperand)) && this.currentOperand !== '.') {
+        this.previousOperandTextElement.innerText = '';
+        this.currentOperandTextElement.innerText = 'Error';
+      }
+      if (this.operation != null ) {
           this.previousOperandTextElement.innerText =
           `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
       } else {
@@ -119,6 +131,7 @@ class Calculator {
     }
   }
   
+  const signButton = document.querySelectorAll('[data-sign]');
   const numberButtons = document.querySelectorAll('[data-number]');
   const operationButtons = document.querySelectorAll('[data-operation]');
   const equalsButton = document.querySelector('[data-equals]');
@@ -152,7 +165,7 @@ class Calculator {
   
   equalsButton.addEventListener('click', button => {
     calculator.compute();
-    calculator.roundUp();
+    // calculator.roundUp();
     calculator.updateDisplay();
   })
   
