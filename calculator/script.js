@@ -63,22 +63,22 @@ class Calculator {
       }
         switch (this.operation) {
           case '+':
-            computation = prev + current;
+            computation = (prev*10 + current*10)/10;
             break
           case '-':
-            computation = prev - current;
+            computation = (prev*10 - current*10)/10;
             break
           case '*':
-            computation = prev * current;
+            computation = (prev*10 * current*10)/100;
             break
           case '÷':
-            computation = prev / current;
+            computation = (prev*10 / current*10)/100;
             break
           case '√':
             (isNaN(prev)) ? computation = Math.sqrt(current) : computation = Math.sqrt(prev);
             break
           case '^':
-            computation = prev ** current;
+            computation = ((prev*10) ** current)/10**current;
             break
             case '±':
               computation = current;
@@ -93,10 +93,6 @@ class Calculator {
       console.log('compute:', prev, this.operation, current,'=', computation);
     }
   
-    roundUp() {
-        
-    }
-
     getDisplayNumber(number) {
       const stringNumber = number.toString()
       const integerDigits = parseFloat(stringNumber.split('.')[0])
@@ -165,7 +161,6 @@ class Calculator {
   
   equalsButton.addEventListener('click', button => {
     calculator.compute();
-    // calculator.roundUp();
     calculator.updateDisplay();
   })
   
