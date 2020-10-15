@@ -11,12 +11,13 @@
   }
   
   .calculator-grid {
+    margin-top: 20px;
     display: grid;
     justify-content: center;
     align-content: center;
-    min-height: 100vh;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    min-height: 50vh;
+    grid-template-columns: repeat(4, 90px);
+    grid-template-rows: minmax(120px, auto) repeat(6, 80px);
   }
   
   .calculator-grid > button {
@@ -39,7 +40,7 @@
   }
   
   .span-two {
-    grid-column: span 2;
+    grid-column: span 3;
   }
   
   .output {
@@ -52,8 +53,7 @@
     padding: 10px;
     word-wrap: break-word;
     word-break: break-all;
-    border-radius: 5px;
-    box-shadow: 0 3px 3px rgb(219, 215, 215) inset;
+    border-radius: 5px  5px 0 0;
   }
   
   .output .previous-operand {
@@ -64,4 +64,34 @@
   .output .current-operand {
     color: white;
     font-size: 2.5rem;
+  }
+
+  .log {
+    grid-column: 1 / -1;
+    background-color: rgba(0, 0, 0, .75);
+    position: relative;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .log__error {
+    margin-left: 5px;
+    color: rgba(255, 255, 255);
+    font-size: 2rem;
+  }
+
+  .delete-btn {
+    margin-right: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    opacity: 0.7;
+    transition: opacity 0.1s linear;
+  }
+
+  .delete-btn:hover {
+    opacity: 1;
   }

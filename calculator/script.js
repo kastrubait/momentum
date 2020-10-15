@@ -11,6 +11,7 @@ class Calculator {
       this.previousOperand = '';
       this.operation = undefined;
       this.readyToReset = false;
+      this.sign = false;
     }
   
     delete() {
@@ -23,48 +24,81 @@ class Calculator {
     }
   
     chooseOperation(operation) {
-      console.log('choose:', operation, this.operation);
-      console.log('choose:', this.previousOperand,'<==>', this.currentOperand);
-      if ((this.currentOperand === '') && (operation !== '√')) {
+      // console.log('choose:', this.previousOperand,'<==>', this.currentOperand);
+      if (this.currentOperand === '' && operation !== '√' &&  operation !== '±') {
+        if (this.operation === '√' && this.previousOperand !== '') {
+          this.previousOperand = Math.sqrt(this.previousOperand);
+        }
         this.operation = operation;
         return;
       }
-      if ((this.currentOperand !== '' || this.previousOperand !== '') && ( this.operation === '√')) {
+
+      if ((this.currentOperand !== '' || this.previousOperand !== '') && this.operation === '√' && operation !== '±') {
         this.compute();
       }
           
-      if (this.currentOperand !== '' && this.previousOperand !== '') {
+      if (this.currentOperand !== '' && operation === '±') {
+        this.currentOperand = String(-1 * this.currentOperand);
+        operation = '';
+        this.sign = true;
+      }
+
+      if (this.currentOperand !== '' && this.previousOperand !== '' &&  operation !== '') {
+        if (operation === '√') {
+          this.currentOperand = Math.sqrt(this.currentOperand);
+          operation == '';
+          return;
+        }
         this.compute();
       }
 
-      if (this.currentOperand !== '' && this.previousOperand === '' && this.operation === '-') {
-        this.previousOperand = -1;
-        this.operation = '*';
-        this.compute();
+      if ( isNaN(this.currentOperand) && operation !== '')  {
+        this.operation = '';
+        this.previousOperand = '';
+        this.currentOperand = '';
+        return;
       }
 
-      this.operation = operation;
-      this.previousOperand = this.currentOperand;
-      this.currentOperand = '';
-      console.log('exit:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
+      if (this.sign) {
+        this.sign = false;
+      } else {
+        if (operation === '±') return;
+        this.operation = operation;
+        if (operation === '√') return;
+        this.previousOperand = this.currentOperand;
+        this.currentOperand = '';
+      }
+      // console.log('exit:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
     }
   
     compute() {
       let computation;
+      const prevStr = String(this.previousOperand);
+      const currentStr = String(this.currentOperand);
+      const prevAccuaracy = (prevStr.includes('.')) ? parseFloat(prevStr.split('.')[1].length) : 0;
+      const currentAccuaracy = (currentStr.includes('.')) ?  parseFloat(currentStr.split('.')[1].length) : 0;
       const prev = parseFloat(this.previousOperand);
       const current = parseFloat(this.currentOperand);
       if (isNaN(prev) || isNaN(current)) {
         if ( this.operation !== '√') return;
       }
+        let accuaracy = 0;
         switch (this.operation) {
           case '+':
-            computation = prev + current;
+            (prevAccuaracy > currentAccuaracy) 
+              ? accuaracy = prevAccuaracy 
+              : accuaracy = currentAccuaracy;
+            computation = +(prev + current).toFixed(accuaracy);
             break
           case '-':
-            computation = prev - current;
+            (prevAccuaracy > currentAccuaracy) 
+              ? accuaracy = prevAccuaracy 
+              : accuaracy = currentAccuaracy;
+            computation = +(prev - current).toFixed(accuaracy);
             break
           case '*':
-            computation = prev * current;
+            accuaracy = prevAccuaracy + currentAccuaracy;
+            computation = +(prev * current).toFixed(accuaracy);
             break
           case '÷':
             computation = prev / current;
@@ -73,8 +107,14 @@ class Calculator {
             (isNaN(prev)) ? computation = Math.sqrt(current) : computation = Math.sqrt(prev);
             break
           case '^':
-            computation = prev ** current;
+            accuaracy = prevAccuaracy*current;
+            (current > 0) 
+              ? computation = +(prev ** current).toFixed(accuaracy)
+              : computation = 1 / prev ** (-1 * current);
             break
+            case '±':
+              computation = current;
+              break
           default:
             return;
         }
@@ -82,13 +122,9 @@ class Calculator {
       this.currentOperand = computation;
       this.operation = undefined;
       this.previousOperand = '';
-      console.log('compute:', prev, this.operation, current,'=', computation);
+      // console.log('compute:', prev, this.operation, current,'=', computation);
     }
   
-    roundUp() {
-        
-    }
-
     getDisplayNumber(number) {
       const stringNumber = number.toString()
       const integerDigits = parseFloat(stringNumber.split('.')[0])
@@ -97,7 +133,7 @@ class Calculator {
       if (isNaN(integerDigits)) {
         integerDisplay = ''
       } else {
-        integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+        integerDisplay = integerDigits.toLocaleString('ru', { maximumFractionDigits: 0 })
       }
       if (decimalDigits != null) {
         return `${integerDisplay}.${decimalDigits}`
@@ -109,8 +145,12 @@ class Calculator {
     updateDisplay() {
       this.currentOperandTextElement.innerText =
         this.getDisplayNumber(this.currentOperand)
-        console.log('update:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
-      if (this.operation != null) {
+        // console.log('update:', this.previousOperand,'|',this.operation,'|',this.currentOperand);
+      if ((isNaN(this.currentOperand) || isNaN(this.previousOperand)) && this.currentOperand !== '.') {
+        this.previousOperandTextElement.innerText = '';
+        this.currentOperandTextElement.innerText = 'Error';
+      }
+      if (this.operation != null ) {
           this.previousOperandTextElement.innerText =
           `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
       } else {
@@ -119,6 +159,7 @@ class Calculator {
     }
   }
   
+  const signButton = document.querySelectorAll('[data-sign]');
   const numberButtons = document.querySelectorAll('[data-number]');
   const operationButtons = document.querySelectorAll('[data-operation]');
   const equalsButton = document.querySelector('[data-equals]');
@@ -152,7 +193,6 @@ class Calculator {
   
   equalsButton.addEventListener('click', button => {
     calculator.compute();
-    calculator.roundUp();
     calculator.updateDisplay();
   })
   
