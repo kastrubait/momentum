@@ -4,6 +4,7 @@ const time = document.querySelector('.time'),
   greeting = document.querySelector('.greeting'),
   name = document.querySelector('.name'),
   focus = document.querySelector('.focus');
+  list = document.querySelector('#list');
 
 // Constants
 const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -11,6 +12,7 @@ const month = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
   'October', 'November', 'December',
 ];
+const timesOfDay = ['night', 'morning', 'day', 'evening'];
 
 // Options
 const showAmPm = true;
@@ -43,22 +45,73 @@ function addZero(n) {
 function setBgGreet() {
   let today = new Date();
     hour = today.getHours();
-  const bgItem = '05';
+  const bgItem = getBgGreet(hour);
   if (hour < 6) {
-    document.body.style.backgroundImage = `url('./assets/images/night/${bgItem}.jpg')`;
+    if (hour === 0) {
+      localStorage.setItem('histBg', JSON.stringify(historyBgGreet));
+    }
+    document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
     greeting.textContent = 'Good Night, ';
     document.body.style.color = 'white';
   } else if (hour < 12) {
-    document.body.style.backgroundImage = `url('./assets/images/morning/${bgItem}.jpg')`;
+    document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
     greeting.textContent = 'Good Morning, ';
   } else if (hour < 18) {
-    document.body.style.backgroundImage = `url('./assets/images/day/${bgItem}.jpg')`;
+    document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
     greeting.textContent = 'Good Afternoon, ';
   } else if (hour < 24) {
-    document.body.style.backgroundImage = `url('./assets/images/evening/${bgItem}.jpg')`;
+    document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
     greeting.textContent = 'Good Evening, ';
     document.body.style.color = 'white';
   }
+}
+
+// List Bacground
+function listBgGreet() {
+  const  allBgGreet = JSON.parse(localStorage.getItem('histBg'));
+  console.log(hour, count);
+  if (count + hour < 23) {
+    count++;
+  } else { 
+    count = -1 * hour;
+  }
+  const bgItem = allBgGreet[count + hour];
+  document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
+  
+}
+
+// Choose Bacground
+function getBgGreet(item) {
+  let historyBgGreet;
+  if (localStorage.getItem('histBg') !== null) {
+    historyBgGreet = JSON.parse(localStorage.getItem('histBg'));
+  } else {
+    historyBgGreet = initArrayBgGreet();
+  }
+  return historyBgGreet[item];
+}
+
+// Init array Bacground
+function initArrayBgGreet() {
+  let historyBgGreet = [];
+  const maxOneTimes = 6
+  const countImg = 20;
+  for (let i = 0; i < 4; i++) {
+    countBgGreet = 0;
+    for (let j = 0; j < maxOneTimes; j++) {
+      while (countBgGreet < maxOneTimes) {
+        nextBgGeet = (!Math.floor(Math.random() * countImg) === 1) ? Math.floor(Math.random() * countImg) + 1 : Math.floor(Math.random() * countImg); 
+        if (historyBgGreet.indexOf(nextBgGeet) == -1) { 
+          const bgGreet = `${timesOfDay[i]}/${nextBgGeet < 10 ? '0'+ nextBgGeet : nextBgGeet}`
+          historyBgGreet.push(`${bgGreet}`);
+          countBgGreet++; 
+        }
+      }
+    }
+  }
+  localStorage.setItem('histBg', JSON.stringify(historyBgGreet));
+  console.log(historyBgGreet);
+  return historyBgGreet;
 }
 
 // Get Name
@@ -107,6 +160,8 @@ name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
+let count = 0;
+list.addEventListener('click', listBgGreet);
 
 // Run
 showTime();

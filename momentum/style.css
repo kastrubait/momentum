@@ -17,6 +17,15 @@ body {
   transition: background-image 1s ease-in-out;
 }
 
+.buttons-panel {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  height: 15vh;
+  position: fixed;
+  top: 0;
+}
+
 .time {
   font-size: 8rem;
 }
@@ -44,5 +53,8 @@ h2 {
   }
   .day {
     font-size: 2rem;
+  }
+  .buttons-panel {
+    width: 70%;
   }
 }
