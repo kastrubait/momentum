@@ -14,6 +14,7 @@ body {
   height: 100vh;
   background-size: cover;
   color: #000000;
+  text-shadow: #000 1px 0 10px;
   transition: background-image 1s ease-in-out;
 }
 
@@ -24,6 +25,7 @@ body {
   height: 15vh;
   position: fixed;
   top: 0;
+  margin-bottom: 2rem;
 }
 
 .time {
@@ -44,6 +46,53 @@ h2 {
   opacity: 0.8;
 }
 
+.none {
+  display: none;
+}
+
+.quote {
+  font: 1.2rem Quicksand, sans-serif;
+  margin: 0;
+  width: 50%;
+  background: #eee;
+  padding: 2em 1rem 1rem 1rem;
+  border-radius: 50% 20% / 10% 40%;
+  box-shadow:
+  0 1px 4px rgba(0, 0, 0, .3),
+  -23px 0 20px -23px rgba(0, 0, 0, .8),
+  23px 0 20px -23px rgba(0, 0, 0, .8),
+  0 0 40px rgba(0, 0, 0, .1) inset;
+}
+.quote figcaption,
+.quote blockquote {
+  margin: 0.5em;
+}
+.quote figcaption {
+  text-align: right;
+}
+.btn {
+  width: 65px;
+  height: 40px;
+  border: 1 solid #9c9898;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  font: 1.2rem Quicksand, sans-serif;
+  border-radius: 50%;
+  filter: grayscale(.8);
+  margin: 7px;
+}
+.btn:hover {
+  background-color: #ecbcbc;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  filter: grayscale(.2);
+}
+.btn:active,
+.btn:focus {
+  outline: 0;
+}
+.btn:active{
+  transform: scale(1.02)
+}
+
 @media (max-width: 700px) {
   .time {
     font-size: 5rem;
@@ -56,5 +105,8 @@ h2 {
   }
   .buttons-panel {
     width: 70%;
+  }
+  .quote {
+    width: 90%;
   }
 }

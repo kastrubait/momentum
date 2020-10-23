@@ -10,9 +10,9 @@
 </head>
 <body>
   <div class="buttons-panel">
-    <i class="fas fa-cloud-sun" style="font-size:48px;color: white;margin-top:1rem;"></i>
-    <i class="fa fa-commenting" style="font-size:48px;color: white;margin-top:1rem;"></i>
-    <i id="list" class="fa fa-chevron-circle-right" style="font-size:48px;color: white;margin-top:1rem;"></i>
+    <i id="" class="fas fa-cloud-sun" style="font-size:48px;color: #eee;margin-top:1rem;"></i>
+    <i id="quote" class="fa fa-commenting" style="font-size:48px;color: #eee;margin-top:1rem;"></i>
+    <i id="list" class="fa fa-chevron-circle-right" style="font-size:48px;color: #eee;margin-top:1rem;"></i>
   </div>
   <time class="time"></time>
   <day class="day"></day>
@@ -20,8 +20,20 @@
     <span class="greeting"></span>
     <span class="name" contenteditable="true"></span>
   </h1>
-  <h2>What Is Your Focus For Today?</h2>
-  <h2 class="focus" contenteditable="true"></h2>
+  <focus class="none">
+    <h2>What Is Your Focus For Today?</h2>
+    <h2 class="focus" contenteditable="true"></h2>
+  </focus>
+  <figure class="quote">
+    <blockquote>
+      You were not born a winner, and you were not born a loser. You are what you make yourself be.
+    </blockquote>
+    <figcaption>
+      <button id="close" class="btn">X</button> 
+      <button id="next" class="btn">next</button>Lou Holtz
+    </figcaption>
+  </figure>
+   
   <script src="script.js"></script>
 </body>
 </html>

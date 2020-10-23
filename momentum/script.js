@@ -5,6 +5,10 @@ const time = document.querySelector('.time'),
   name = document.querySelector('.name'),
   focus = document.querySelector('.focus');
   list = document.querySelector('#list');
+  cls = document.querySelector('#close');
+  next = document.querySelector('#next');
+  quote = document.querySelector('#quote');
+
 
 // Constants
 const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -15,7 +19,7 @@ const month = [
 const timesOfDay = ['night', 'morning', 'day', 'evening'];
 
 // Options
-const showAmPm = true;
+// const showAmPm = true;
 
 // Show Time
 function showTime() {
@@ -48,6 +52,7 @@ function setBgGreet() {
   const bgItem = getBgGreet(hour);
   if (hour < 6) {
     if (hour === 0) {
+      historyBgGreet = initArrayBgGreet();
       localStorage.setItem('histBg', JSON.stringify(historyBgGreet));
     }
     document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
@@ -156,12 +161,31 @@ function setFocus(e) {
   }
 }
 
+function closeяQuote() {  
+  document.querySelector('.quote').classList.toggle('none');
+  document.querySelector('focus').classList.toggle('none');
+}
+
+async function getQuote() {  
+  const url = `https://cors-anywhere.herokuapp.com/https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
+  // const url =`https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1`;
+  const res = await fetch(url);
+  const data = await res.json(); 
+  console.log(data );
+  // blockquote.textContent = data.quoteText;
+  // figcaption.textContent = data.quoteAuthor;
+}
+document.addEventListener('DOMContentLoaded', getQuote);
+next.addEventListener('click', getQuote);
+
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
 let count = 0;
 list.addEventListener('click', listBgGreet);
+cls.addEventListener('click', closeяQuote);
+quote.addEventListener('click', closeяQuote);
 
 // Run
 showTime();
