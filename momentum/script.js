@@ -160,6 +160,14 @@ function setFocus(e) {
     localStorage.setItem('focus', e.target.innerText);
   }
 }
+const userCity = 'Minsk';
+async function getWeather() {  
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${userCity}&lang=ru&appid=2f830623220fb1e25841be257b946102&units=metric`;
+  const res = await fetch(url);
+  const data = await res.json(); 
+  console.log(data);
+}
+getWeather()
 
 function closeяQuote() {  
   document.querySelector('.quote').classList.toggle('none');
@@ -167,13 +175,13 @@ function closeяQuote() {
 }
 
 async function getQuote() {  
-  const url = `https://cors-anywhere.herokuapp.com/https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
+  const url = `https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
   // const url =`https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1`;
   const res = await fetch(url);
   const data = await res.json(); 
   console.log(data );
-  // blockquote.textContent = data.quoteText;
-  // figcaption.textContent = data.quoteAuthor;
+  blockquote.textContent = data.quoteText;
+  figcaption.textContent = data.quoteAuthor;
 }
 document.addEventListener('DOMContentLoaded', getQuote);
 next.addEventListener('click', getQuote);
