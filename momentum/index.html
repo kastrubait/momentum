@@ -18,8 +18,8 @@
     <time class="time"></time>
     <day class="day"></day>
     <h1>
-      <span class="greeting"></span>
-      <span class="name" contenteditable="true"></span>
+      <div class="greeting"></div>
+      <h1 class="name" contenteditable="true"></h1>
     </h1>
     <focus class="none">
       <h2>What Is Your Focus For Today?</h2>
@@ -36,7 +36,6 @@
       <button id="next" class="btn">next</button>
     </figure>
     <div class="weather none">
-      <!-- <div class="city" contenteditable="true">Minsk</div> -->
       <input type="text" class="city" onchange="setCity(this.value)">
       <div class="error"></div>
       <div class="detail">
@@ -46,8 +45,7 @@
           <p class="wind"></p>
           <p class="humidity"></p>
         </div>
-      </>
-      
+      </div>
       <button id="closeW" class="btn">X</button>
     </div>
   <script src="script.js"></script>

@@ -145,7 +145,8 @@ function initArrayBgGreet() {
 
 // Get Name
 function getName() {
-  if (localStorage.getItem('name') === null) {
+  const nameLS = localStorage.getItem('name');
+  if ( nameLS === null ||  nameLS.trim().length === 0) {
     name.textContent = '[Enter Name]';
   } else {
     name.textContent = localStorage.getItem('name');
@@ -153,20 +154,21 @@ function getName() {
 }
 
 // Set Name
-function setName(e) {
-  if (e.type === 'keypress') {
-    if (e.which == 13 || e.keyCode == 13) {
-      localStorage.setItem('name', e.target.innerText);
+function setName(event) {
+  if (event.type === 'keypress' || event.type === 'click') {
+    if (event.which == 13 || event.keyCode == 13) {
+      localStorage.setItem('name', event.target.innerText);
       name.blur();
     }
   } else {
-    localStorage.setItem('name', e.target.innerText);
+    localStorage.setItem('name', event.target.innerText);
   }
 }
 
 // Get Focus
 function getFocus() {
-  if (localStorage.getItem('focus') === null) {
+  const focusLS = localStorage.getItem('focus');
+  if ( focusLS === null || focusLS.trim().length === 0) {
     focus.textContent = '[Enter Focus]';
   } else {
     focus.textContent = localStorage.getItem('focus');
@@ -175,7 +177,7 @@ function getFocus() {
 
 // Set Focus
 function setFocus(event) {
-  if (eevent.type === 'keypress') {
+  if (event.type === 'keypress') {
     if (event.which == 13 || event.keyCode == 13) {
       localStorage.setItem('focus', event.target.innerText);
       focus.blur();
@@ -242,12 +244,23 @@ async function getQuote() {
   document.querySelector('figcaption').textContent = `ouenglish.ru`;
   document.body.style.color = 'black';
 }
+
+function clearName() {
+  name.textContent = "";
+};
+
+function clearFocus() {
+  focus.textContent = "";
+}
+
 document.addEventListener('DOMContentLoaded', getQuote);
 next.addEventListener('click', getQuote);
 name.addEventListener('keypress', setName);
-name.addEventListener('blur', setName);
+name.addEventListener('blur', getName);
+name.addEventListener('focus', clearName);
 focus.addEventListener('keypress', setFocus);
-focus.addEventListener('blur', setFocus);
+focus.addEventListener('blur', getFocus);
+focus.addEventListener('focus', clearFocus);
 city.addEventListener('blur', setCity);
 let count = 0;
 list.addEventListener('click', listBgGreet);
