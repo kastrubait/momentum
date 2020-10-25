@@ -29,7 +29,8 @@ body {
 }
 
 .time {
-  font-size: 8rem;
+  margin-top: 2rem;
+  font-size: 7rem;
 }
 
 .day {
@@ -38,7 +39,7 @@ body {
 }
 
 h1 {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
@@ -46,14 +47,62 @@ h2 {
   opacity: 0.8;
 }
 
+input {
+  text-align: center;
+  font-size: 18px;
+}
 .none {
   display: none;
+}
+
+.weather {
+  font: 1.2rem Quicksand, sans-serif;
+  margin: 0;
+  width: 50%;
+  color: #000000;
+  background: rgba(116, 114, 114, 0.74);
+  padding: 1em 1rem 1rem 1rem;
+  border-radius: 50% 20% / 10% 40%;
+  box-shadow:
+  0 1px 4px rgba(0, 0, 0, .3),
+  -23px 0 20px -23px rgba(0, 0, 0, .8),
+  23px 0 20px -23px rgba(0, 0, 0, .8),
+  0 0 40px rgba(0, 0, 0, .1) inset;
+}
+
+.detail {
+  display: flex;
+  justify-content: space-around;
+}
+
+.error {
+  width: 100%;
+  text-align: center;
+  color: red;
+}
+
+.data {
+  margin: 20px;
+}
+
+.city {  
+  width: 200px;
+  padding: 10px 0;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.temp,
+.wind,
+.humidity {    
+  font-size: 20px;
 }
 
 .quote {
   font: 1.2rem Quicksand, sans-serif;
   margin: 0;
   width: 50%;
+  color: #000000;
   background: #eee;
   padding: 2em 1rem 1rem 1rem;
   border-radius: 50% 20% / 10% 40%;
@@ -81,7 +130,8 @@ h2 {
   margin: 7px;
 }
 .btn:hover {
-  background-color: #ecbcbc;
+  color: #eee;
+  background-color: #2c2b2b;
   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
   filter: grayscale(.2);
 }
@@ -98,15 +148,18 @@ h2 {
     font-size: 5rem;
   }
   .name {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .day {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .buttons-panel {
     width: 70%;
   }
   .quote {
+    width: 90%;
+  }
+  .weather {
     width: 90%;
   }
 }

@@ -8,7 +8,9 @@ const time = document.querySelector('.time'),
   cls = document.querySelector('#close');
   next = document.querySelector('#next');
   quote = document.querySelector('#quote');
-
+  weath = document.querySelector('#closeW');
+  weather = document.querySelector('#weath');
+  city = document.querySelector('input');
 
 // Constants
 const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -17,9 +19,6 @@ const month = [
   'October', 'November', 'December',
 ];
 const timesOfDay = ['night', 'morning', 'day', 'evening'];
-
-// Options
-// const showAmPm = true;
 
 // Show Time
 function showTime() {
@@ -61,9 +60,11 @@ function setBgGreet() {
   } else if (hour < 12) {
     document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
     greeting.textContent = 'Good Morning, ';
+    document.body.style.color = 'white';
   } else if (hour < 18) {
     document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
     greeting.textContent = 'Good Afternoon, ';
+    document.body.style.color = 'white';
   } else if (hour < 24) {
     document.body.style.backgroundImage = `url('./assets/images/${bgItem}.jpg')`;
     greeting.textContent = 'Good Evening, ';
@@ -74,7 +75,6 @@ function setBgGreet() {
 // List Bacground
 function listBgGreet() {
   const  allBgGreet = JSON.parse(localStorage.getItem('histBg'));
-  console.log(hour, count);
   if (count + hour < 23) {
     count++;
   } else { 
@@ -150,50 +150,81 @@ function getFocus() {
 }
 
 // Set Focus
-function setFocus(e) {
-  if (e.type === 'keypress') {
-    if (e.which == 13 || e.keyCode == 13) {
-      localStorage.setItem('focus', e.target.innerText);
+function setFocus(event) {
+  if (eevent.type === 'keypress') {
+    if (event.which == 13 || event.keyCode == 13) {
+      localStorage.setItem('focus', event.target.innerText);
       focus.blur();
     }
   } else {
-    localStorage.setItem('focus', e.target.innerText);
+    localStorage.setItem('focus', event.target.innerText);
   }
 }
-const userCity = 'Minsk';
-async function getWeather() {  
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${userCity}&lang=ru&appid=2f830623220fb1e25841be257b946102&units=metric`;
-  const res = await fetch(url);
-  const data = await res.json(); 
-  console.log(data);
-}
-getWeather()
 
-function closeяQuote() {  
+function closeWeather() {  
+  document.querySelector('.iconW').setAttribute('src', "");
+  const weather = document.querySelector('.weather');
+  weather.classList.toggle('none');
+  document.querySelector('focus').classList.toggle('none');
+    const userCity = localStorage.getItem('city');
+    getWeather(userCity);
+}
+
+async function getWeather(userCity) {  
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${userCity}&lang=en&appid=2f830623220fb1e25841be257b946102&units=metric`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.cod !== 200 ){
+    document.querySelector('.error').classList.remove('none');
+    document.querySelector('.error').textContent = data.message;
+  } else {
+  document.querySelector('.error').classList.add('none');
+   const { temp, humidity } = data.main;
+   const { speed } = data.wind;
+   const { icon } = data.weather[0];
+   console.log(data);
+   document.querySelector('.temp').textContent = `Feel like: ${temp}°`;
+  document.querySelector('.humidity').textContent = `Wind: ${humidity}m/s`;
+  document.querySelector('.wind').textContent = `Humidity: ${speed}%`;
+  document.querySelector('.iconW').setAttribute('src', `http://openweathermap.org/img/wn/${icon}@2x.png`);
+  }
+}
+
+function setCity(value) {
+  if (String(value).trim().length !== 0) {
+    localStorage.setItem('city', JSON.stringify(value));
+  }
+  getWeather(value);
+}
+
+function closeQuote() {  
   document.querySelector('.quote').classList.toggle('none');
   document.querySelector('focus').classList.toggle('none');
 }
 
 async function getQuote() {  
-  const url = `https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
+  // const url = `https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
   // const url =`https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1`;
   const res = await fetch(url);
   const data = await res.json(); 
   console.log(data );
   blockquote.textContent = data.quoteText;
   figcaption.textContent = data.quoteAuthor;
+  document.body.style.color = 'black';
 }
 document.addEventListener('DOMContentLoaded', getQuote);
 next.addEventListener('click', getQuote);
-
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
+city.addEventListener('blur', setCity);
 let count = 0;
 list.addEventListener('click', listBgGreet);
-cls.addEventListener('click', closeяQuote);
-quote.addEventListener('click', closeяQuote);
+cls.addEventListener('click', closeQuote);
+quote.addEventListener('click', closeQuote);
+weath.addEventListener('click', closeWeather);
+weather.addEventListener('click', closeWeather);
 
 // Run
 showTime();
