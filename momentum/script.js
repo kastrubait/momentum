@@ -13,12 +13,36 @@ const time = document.querySelector('.time'),
   city = document.querySelector('input');
 
 // Constants
+const QUOTE = [
+  { mess: 'Formal education will make you a living. Self-education will make you a fortune'},
+  { mess: 'Never mind your happiness; do your duty'},
+  { mess: 'Two things are infinite: the universe and human stupidity; and I\'m not sure about the universe'},
+  { mess: 'Being entirely honest with oneself is a good exercise'},
+  { mess: 'England and America are two countries separated by the same language'},
+  { mess: 'Failure does not mean I\'m a failure; It does mean I have not yet succeeded'},
+  { mess: 'This happens to be that the power of laughter and love would beat out the power of fear every time'},
+  { mess: 'To be, or not to be: that is the question'},
+  { mess: 'Never leave that till tomorrow which you can do today'},
+  { mess: 'The more you say, the less people remember'},
+  { mess: 'Love as expensive crystal, you with it be cautious'},
+  { mess: 'When you gaze long into an abyss the abyss also gazes into you'},
+  { mess: 'Loneliness is when you hear as the clock ticks'},
+  { mess: 'Being entirely honest with oneself is a good exercise'},
+  { mess: 'Love is an irresistible desire to be irresistibly desired'},
+  { mess: 'Lost time is never found again'},
+  { mess: 'Loneliness is when you hear as the clock ticks'},
+  { mess: 'The time for action is now. It’s never too late to do something'}
+];
 const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const month = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
   'October', 'November', 'December',
 ];
 const timesOfDay = ['night', 'morning', 'day', 'evening'];
+
+//Options
+let isQuote = false;
+let isWeather = false;
 
 // Show Time
 function showTime() {
@@ -161,7 +185,9 @@ function setFocus(event) {
   }
 }
 
-function closeWeather() {  
+function closeWeather() {
+  if (isQuote) closeQuote();  
+  isWeather = !isWeather;
   document.querySelector('.iconW').setAttribute('src', "");
   const weather = document.querySelector('.weather');
   weather.classList.toggle('none');
@@ -171,6 +197,7 @@ function closeWeather() {
 }
 
 async function getWeather(userCity) {  
+  isWeaher = true;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${userCity}&lang=en&appid=2f830623220fb1e25841be257b946102&units=metric`;
   const res = await fetch(url);
   const data = await res.json();
@@ -179,14 +206,13 @@ async function getWeather(userCity) {
     document.querySelector('.error').textContent = data.message;
   } else {
   document.querySelector('.error').classList.add('none');
-   const { temp, humidity } = data.main;
-   const { speed } = data.wind;
-   const { icon } = data.weather[0];
-   console.log(data);
-   document.querySelector('.temp').textContent = `Feel like: ${temp}°`;
-  document.querySelector('.humidity').textContent = `Wind: ${humidity}m/s`;
-  document.querySelector('.wind').textContent = `Humidity: ${speed}%`;
-  document.querySelector('.iconW').setAttribute('src', `http://openweathermap.org/img/wn/${icon}@2x.png`);
+    const { temp, humidity } = data.main;
+    const { speed } = data.wind;
+    const { icon } = data.weather[0];
+    document.querySelector('.temp').textContent = `Feel like: ${temp}°`;
+    document.querySelector('.humidity').textContent = `Wind: ${speed }m/s`;
+    document.querySelector('.wind').textContent = `Humidity: ${humidity}%`;
+    document.querySelector('.iconW').setAttribute('src', `http://openweathermap.org/img/wn/${icon}@2x.png`);
   }
 }
 
@@ -197,19 +223,23 @@ function setCity(value) {
   getWeather(value);
 }
 
-function closeQuote() {  
+function closeQuote() { 
+  if (isWeather) closeWeather();  
+  isQuote = !isQuote;
   document.querySelector('.quote').classList.toggle('none');
   document.querySelector('focus').classList.toggle('none');
 }
 
 async function getQuote() {  
-  // const url = `https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
-  // const url =`https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1`;
-  const res = await fetch(url);
-  const data = await res.json(); 
-  console.log(data );
-  blockquote.textContent = data.quoteText;
-  figcaption.textContent = data.quoteAuthor;
+  isQuote = true;
+  //const url = `https://cors-anywhere.herokuapp.com/https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en`;
+  // const res = await fetch(url);
+  // const data = await res.json(); 
+  const data = QUOTE;
+  const numQuote = Math.floor(Math.random() * 18);
+  const { mess } = data[numQuote];
+  document.querySelector('blockquote').textContent = mess;
+  document.querySelector('figcaption').textContent = `ouenglish.ru`;
   document.body.style.color = 'black';
 }
 document.addEventListener('DOMContentLoaded', getQuote);
