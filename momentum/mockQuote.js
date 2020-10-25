@@ -1,0 +1,20 @@
+export const QUOTE = [
+    { mess: 'Formal education will make you a living. Self-education will make you a fortune'},
+    { mess: 'Never mind your happiness; do your duty'},
+    { mess: 'Two things are infinite: the universe and human stupidity; and I\'m not sure about the universe'},
+    { mess: 'Being entirely honest with oneself is a good exercise'},
+    { mess: 'England and America are two countries separated by the same language'},
+    { mess: 'Failure does not mean I\'m a failure; It does mean I have not yet succeeded'},
+    { mess: 'This happens to be that the power of laughter and love would beat out the power of fear every time'},
+    { mess: 'To be, or not to be: that is the question'},
+    { mess: 'Never leave that till tomorrow which you can do today'},
+    { mess: 'The more you say, the less people remember'},
+    { mess: 'Love as expensive crystal, you with it be cautious'},
+    { mess: 'When you gaze long into an abyss the abyss also gazes into you'},
+    { mess: 'Loneliness is when you hear as the clock ticks'},
+    { mess: 'Being entirely honest with oneself is a good exercise'},
+    { mess: 'Love is an irresistible desire to be irresistibly desired'},
+    { mess: 'Lost time is never found again'},
+    { mess: 'Loneliness is when you hear as the clock ticks'},
+    { mess: 'The time for action is now. It’s never too late to do something'}
+];
