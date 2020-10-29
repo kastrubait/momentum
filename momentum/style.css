@@ -13,7 +13,7 @@ body {
   text-align: center;
   height: 100vh;
   background-size: cover;
-  color: #000000;
+  /* color: #fff; */
   text-shadow: #000 1px 0 10px;
   transition: background-image 1s ease-in-out;
 }
@@ -26,6 +26,17 @@ body {
   position: fixed;
   top: 0;
   margin-bottom: 2rem;
+}
+.style {
+  font-size:48px;
+  color: #eee;
+  margin-top:1rem;
+}
+
+i:hover {
+  cursor: pointer;
+  color:rgba(11, 78, 122, 0.849);
+  text-shadow: #eee 1px 0 10px;
 }
 
 .time {
@@ -47,10 +58,15 @@ h2 {
   opacity: 0.8;
 }
 
+h4 {
+  color: #ffffff;
+}
+
 input {
   text-align: center;
   font-size: 18px;
 }
+
 .none {
   display: none;
 }
@@ -59,8 +75,7 @@ input {
   font: 1.2rem Quicksand, sans-serif;
   margin: 0;
   width: 50%;
-  color: #000000;
-  background: rgba(116, 114, 114, 0.74);
+  background: rgba(11, 78, 122, 0.74);
   padding: 1em 1rem 1rem 1rem;
   border-radius: 50% 20% / 10% 40%;
   box-shadow:
@@ -73,12 +88,13 @@ input {
 .detail {
   display: flex;
   justify-content: space-around;
+  height: 100px;
 }
 
 .error {
   width: 100%;
   text-align: center;
-  color: red;
+  color: rgba(255, 0, 0, 0.678);
 }
 
 .city {  
@@ -88,6 +104,7 @@ input {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
 .temp,
 .wind,
 .humidity {    
@@ -97,15 +114,16 @@ input {
 }
 
 .iconW {
-  margin-top: -30px;
+  /* margin-top: -10px; */
+  margin-left: -10px;
 }
 
 .quote {
   font: 1.2rem Quicksand, sans-serif;
   margin: 0;
   width: 50%;
-  color: #000000;
-  background: #eee;
+  color: #eee;
+  background: rgba(11, 78, 122, 0.74);
   padding: 2em 1rem 1rem 1rem;
   border-radius: 50% 20% / 10% 40%;
   box-shadow:
@@ -114,33 +132,40 @@ input {
   23px 0 20px -23px rgba(0, 0, 0, .8),
   0 0 40px rgba(0, 0, 0, .1) inset;
 }
+
 .quote figcaption,
 .quote blockquote {
   margin: 0.5em;
 }
+
 .quote figcaption {
   text-align: right;
 }
+
 .btn {
   width: 65px;
   height: 40px;
   border: 1 solid #9c9898;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 0.377);
   font: 1.2rem Quicksand, sans-serif;
   border-radius: 50%;
   filter: grayscale(.8);
   margin: 7px;
 }
+
 .btn:hover {
   color: #eee;
   background-color: #2c2b2b;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  cursor: pointer;
+  box-shadow: 0 0 5px 2px rgba(221, 221, 221, 1);
   filter: grayscale(.2);
 }
+
 .btn:active,
 .btn:focus {
   outline: 0;
 }
+
 .btn:active{
   transform: scale(1.02)
 }
@@ -153,7 +178,16 @@ input {
 .focus,
 .name {
  min-width: 50px;
+ border-radius: 5px;
  background: rgba(235, 231, 231, 0.534);
+ color: rgba(14, 91, 143, 0.945);
+ text-shadow: #eee 1px 0 10px;
+ padding-left: 10px;
+ padding-right: 10px;
+}
+
+.name {
+  font-size: 48px;
 }
 
 @media (max-width: 700px) {
@@ -174,5 +208,10 @@ input {
   }
   .weather {
     width: 90%;
+  }
+  .temp,
+  .wind,
+  .humidity {
+    font-size: 14px;
   }
 }

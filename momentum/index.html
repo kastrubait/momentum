@@ -11,9 +11,9 @@
 </head>
 <body>
     <div class="buttons-panel">
-      <i id="weath" class="fa fa-globe" style="font-size:48px;color: #eee;margin-top:1rem;"></i>
-      <i id="quote" class="fa fa-commenting" style="font-size:48px;color: #eee;margin-top:1rem;"></i>
-      <i id="list" class="fa fa-chevron-circle-right" style="font-size:48px;color: #eee;margin-top:1rem;"></i>
+      <i id="weath" class="fa fa-globe style"></i>
+      <i id="quote" class="fa fa-commenting style"></i>
+      <i id="list" class="fa fa-chevron-circle-right style"></i>
     </div>
     <time class="time"></time>
     <day class="day"></day>
@@ -36,6 +36,7 @@
       <button id="next" class="btn">next</button>
     </figure>
     <div class="weather none">
+      <h4>Weather forecast:</h4>
       <input type="text" class="city" onchange="setCity(this.value)">
       <div class="error"></div>
       <div class="detail">

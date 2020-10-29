@@ -94,6 +94,7 @@ function setBgGreet() {
     greeting.textContent = 'Good Evening, ';
     document.body.style.color = 'white';
   }
+  setTimeout(setBgGreet, 2000);
 }
 
 // List Bacground
@@ -155,7 +156,7 @@ function getName() {
 
 // Set Name
 function setName(event) {
-  if (event.type === 'keypress' || event.type === 'click') {
+  if (event.type === 'keypress') {
     if (event.which == 13 || event.keyCode == 13) {
       localStorage.setItem('name', event.target.innerText);
       name.blur();
@@ -194,8 +195,9 @@ function closeWeather() {
   const weather = document.querySelector('.weather');
   weather.classList.toggle('none');
   document.querySelector('focus').classList.toggle('none');
-    const userCity = localStorage.getItem('city');
-    getWeather(userCity);
+  const userCity = localStorage.getItem('city');
+  city.value = userCity.slice(1,  userCity.length-1);
+  getWeather(city.value);
 }
 
 async function getWeather(userCity) {  
@@ -225,6 +227,16 @@ function setCity(value) {
   getWeather(value);
 }
 
+// Get City
+function getCity() {
+  const city = localStorage.getItem('city');
+  if ( city === null || city.trim().length === 0) {
+    city.value = 'Enter City';
+  } else {
+    city.value = localStorage.getItem('city');
+  }
+}
+
 function closeQuote() { 
   if (isWeather) closeWeather();  
   isQuote = !isQuote;
@@ -242,7 +254,6 @@ async function getQuote() {
   const { mess } = data[numQuote];
   document.querySelector('blockquote').textContent = mess;
   document.querySelector('figcaption').textContent = `ouenglish.ru`;
-  document.body.style.color = 'black';
 }
 
 function clearName() {
@@ -261,7 +272,7 @@ name.addEventListener('focus', clearName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', getFocus);
 focus.addEventListener('focus', clearFocus);
-city.addEventListener('blur', setCity);
+city.addEventListener('blur', getCity);
 let count = 0;
 list.addEventListener('click', listBgGreet);
 cls.addEventListener('click', closeQuote);
